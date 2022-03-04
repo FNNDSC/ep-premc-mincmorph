@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name             = 'premc-mincmorph',
-    version          = '0.1.0',
+    version          = '0.1.1',
     description      = 'Smoothen a mask in preparation for marching cubes.',
     author           = 'Jennings Zhang',
     author_email     = 'Jennings.Zhang@childrens.harvard.edu',

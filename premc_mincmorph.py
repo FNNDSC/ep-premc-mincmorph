@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import sys
 from argparse import ArgumentParser, Namespace
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -13,6 +14,8 @@ from civet.shells import quiet
 parser = ArgumentParser(description='Smoothen masks using mincmorph')
 parser.add_argument('-p', '--pattern', default='**/*.mnc',
                     help='pattern for file names to include')
+parser.add_argument('-q', '--quiet', action='store_true',
+                    help='disable status messages')
 
 
 def premc_mincmorph(mask: Path, smoothened: Path) -> None:
@@ -27,6 +30,9 @@ def premc_mincmorph(mask: Path, smoothened: Path) -> None:
     min_cpu_limit='1000m',
 )
 def main(options: Namespace, inputdir: Path, outputdir: Path):
+    if options.quiet:
+        logger.remove()
+        logger.add(sys.stderr, level='WARNING')
 
     results = []
     with ThreadPoolExecutor(max_workers=len(os.sched_getaffinity(0))) as pool:
