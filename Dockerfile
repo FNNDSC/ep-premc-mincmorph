@@ -4,10 +4,10 @@
 FROM docker.io/python:3.10.2-slim-buster
 
 LABEL org.opencontainers.image.authors="FNNDSC <dev@babyMRI.org>" \
-      org.opencontainers.image.title="ChRIS Plugin Title" \
-      org.opencontainers.image.description="A ChRIS ds plugin that..."
+      org.opencontainers.image.title="pl-premc-mincmorph" \
+      org.opencontainers.image.description="A ChRIS plugin which smoothens a mask using mincmorph in preparation for marching-cubes."
 
-WORKDIR /usr/local/src/app
+WORKDIR /usr/local/src/ep-premc-mincmorph
 
 COPY requirements.txt .
 RUN pip install -r requirements.txt
@@ -15,4 +15,4 @@ RUN pip install -r requirements.txt
 COPY . .
 RUN pip install .
 
-CMD ["commandname", "--help"]
+CMD ["premc_mincmorph", "--help"]
